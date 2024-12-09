@@ -1,7 +1,9 @@
 import 'package:map_tutorial_template/domain/permission/i_permission_service.dart';
 import 'package:map_tutorial_template/domain/permission/location_permission_status.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class PermissionService implements IPermissionService {
   
   @override

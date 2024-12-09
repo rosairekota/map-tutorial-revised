@@ -7,5 +7,5 @@ final GetIt getIt = GetIt.instance;
 
 @injectableInit
 void configureInjection(String env) {
-  getIt.init( environment: env);
+  getIt.init(environment: env);
 }
