@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:map_tutorial_template/application/app_life_cycle/app_life_cycle_cubit.dart';
 import 'package:map_tutorial_template/application/permission/permission_cubit.dart';
 import 'package:map_tutorial_template/injection.dart';
 
@@ -11,8 +12,15 @@ class AppWidget extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<PermissionCubit>()..initialize(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<PermissionCubit>()..initialize(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<ApplicationLifeCycleCubit>(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Map Tutorial Template',
