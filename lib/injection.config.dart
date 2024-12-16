@@ -32,9 +32,9 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
+    gh.lazySingleton<_i156.LocationCubit>(() => _i156.LocationCubit());
     gh.lazySingleton<_i255.ApplicationLifeCycleCubit>(
         () => _i255.ApplicationLifeCycleCubit());
-    gh.lazySingleton<_i156.LocationCubit>(() => _i156.LocationCubit());
     gh.lazySingleton<_i700.IPermissionService>(() => _i617.PermissionService());
     gh.lazySingleton<_i537.PermissionCubit>(
         () => _i537.PermissionCubit(gh<_i700.IPermissionService>()));
