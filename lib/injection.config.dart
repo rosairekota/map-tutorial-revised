@@ -16,8 +16,12 @@ import 'package:map_tutorial_template/application/location/location_cubit.dart'
     as _i156;
 import 'package:map_tutorial_template/application/permission/permission_cubit.dart'
     as _i537;
+import 'package:map_tutorial_template/domain/location/i_location_service.dart'
+    as _i328;
 import 'package:map_tutorial_template/domain/permission/i_permission_service.dart'
     as _i700;
+import 'package:map_tutorial_template/infrastructure/location/location_service.dart'
+    as _i678;
 import 'package:map_tutorial_template/infrastructure/permisson/permission_service.dart'
     as _i617;
 
@@ -38,6 +42,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i700.IPermissionService>(() => _i617.PermissionService());
     gh.lazySingleton<_i537.PermissionCubit>(
         () => _i537.PermissionCubit(gh<_i700.IPermissionService>()));
+    gh.lazySingleton<_i328.ILocationService>(() => _i678.LocationService());
     return this;
   }
 }
