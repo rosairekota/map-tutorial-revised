@@ -15,6 +15,7 @@
 .buildlog/
 .history
 .svn/
+/lib/consts.dart
 
 # IntelliJ related
 *.iml
