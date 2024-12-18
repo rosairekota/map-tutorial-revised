@@ -2,11 +2,6 @@
 // import 'package:cool_dropdown/models/cool_dropdown_item.dart';
 // import 'package:flutter/material.dart';
 
-
-// void main() {
-//   runApp(MyApp());
-// }
-
 // class MyApp extends StatefulWidget {
 //   const MyApp({super.key});
 
@@ -55,9 +50,7 @@
 //             icon: SizedBox(
 //               height: 25,
 //               width: 25,
-//               child: SvgPicture.asset(
-//                 'assets/${pokemons[i]}.svg',
-//               ),
+//               child: Icon(Icons.precision_manufacturing_rounded),
 //             ),
 //             value: pokemons[i]),
 //       );
@@ -69,18 +62,13 @@
 //             margin: EdgeInsets.only(left: 10),
 //             height: 25,
 //             width: 25,
-//             child: SvgPicture.asset(
-//               'assets/${fruits[i]}.svg',
-//             ),
+//             child: Icon(Icons.currency_yen),
 //           ),
 //           selectedIcon: Container(
 //             margin: EdgeInsets.only(left: 10),
 //             height: 25,
 //             width: 25,
-//             child: SvgPicture.asset(
-//               'assets/${fruits[i]}.svg',
-//               color: Color(0xFF6FCC76),
-//             ),
+//             child: Icon(Icons.dangerous),
 //           ),
 //           value: fruits[i]));
 //     }
@@ -236,9 +224,7 @@
 //                   icon: SizedBox(
 //                     width: 25,
 //                     height: 25,
-//                     child: SvgPicture.asset(
-//                       'assets/pokeball.svg',
-//                     ),
+//                     child: Icon(Icons.u_turn_left),
 //                   ),
 //                 ),
 //                 dropdownItemOptions: DropdownItemOptions(
