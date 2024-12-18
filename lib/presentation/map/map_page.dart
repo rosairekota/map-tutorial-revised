@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_animations/flutter_map_animations.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:map_tutorial_template/consts.dart';
 
@@ -12,8 +13,26 @@ class MapPage extends StatefulWidget {
   State<MapPage> createState() => _MapPageState();
 }
 
-class _MapPageState extends State<MapPage> {
-  final mapController = MapController();
+class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
+  late final animatedMapController;
+
+  @override
+  void dispose() {
+    animatedMapController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    animatedMapController = AnimatedMapController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2500),
+      curve: Curves.easeInOut,
+      cancelPreviousAnimations: true, // Default to false
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +42,7 @@ class _MapPageState extends State<MapPage> {
       body: Stack(
         children: [
           FlutterMap(
-            mapController: mapController,
+            mapController: animatedMapController.mapController,
             options: MapOptions(
               initialCenter:
                   LatLng(51.509364, -0.128928), // Center the map over London
@@ -66,7 +85,10 @@ class _MapPageState extends State<MapPage> {
               padding: const EdgeInsets.only(bottom: 30),
               child: CenterButton(
                 onPressed: () {
-                  mapController.move(LatLng(51.50853, -0.12574), 8);
+                  animatedMapController.animateTo(
+                    dest: LatLng(51.50853, -0.12574),
+                    zoom: 8.0,
+                  );
                 },
               ),
             ),
@@ -77,24 +99,54 @@ class _MapPageState extends State<MapPage> {
   }
 }
 
-class MyMarker extends StatelessWidget {
+class MyMarker extends StatefulWidget {
   const MyMarker({super.key});
 
   @override
+  State<MyMarker> createState() => _MyMarkerState();
+}
+
+class _MyMarkerState extends State<MyMarker>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController controller;
+  late final Animation<double> animation;
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    );
+    animation = Tween<double>(begin: 30, end: 45).animate(controller);
+    controller.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 60,
-        height: 60,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.redAccent,
-        ),
-        child: Icon(
-          Icons.person_outline_rounded,
-          size: 42,
-        ),
+    return AnimatedBuilder(
+      animation: animation,
+      child: Icon(
+        Icons.person_outline_rounded,
+        size: animation.value * 0.7,
       ),
+      builder: (context, child) {
+        return Center(
+          child: Container(
+              width: animation.value,
+              height: animation.value,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.redAccent,
+              ),
+              child: child),
+        );
+      },
     );
   }
 }
