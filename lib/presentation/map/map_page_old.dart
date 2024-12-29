@@ -1,3 +1,6 @@
+//# soft_edge_blur: ^0.1.3
+//# stroke_text: ^0.0.3
+
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_map/flutter_map.dart';
